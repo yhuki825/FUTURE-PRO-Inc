@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<!--
+================================================================
+  株式会社FUTURE PRO ブランドサイト デザイン案
+  ---------------------------------------------------------------
+  コンセプト：「SEE THE UNSEEN ― 見えないものを、整える。」
+    社名「FUTURE PRO（未来のプロフェッショナル）」と、
+    2つの事業に共通する“見えないものに向き合う”仕事から着想。
+      ・ビルメンテナンス事業 … 壁の裏・ダクトの奥に潜むカビ
+      ・エネルギー事業      … 請求書の数字の奥に潜む電力コストのムダ
+    「検査・スキャン」をモチーフに、ヒーローでは走査線が
+    漂う胞子（不可視）を整列した光の格子（可視・整った状態）へ変える。
+    配色：深い墨紺をベースに、衛生＝ミントアクア／電力＝アンバー。
+
+  デプロイ：Cloudflare Pages（Direct Upload）に本ファイル1枚を
+    アップロードするだけで公開可能。ビルド不要・外部依存は
+    Google Fonts と Unsplash 画像のみ（画像読込失敗時はグラデーション表示）。
+
+  ■ 公開前の確認事項チェックリスト（すべて画面には表示されません）
+  [ ] 1. 設立年月日・資本金・従業員数・営業時間（会社概要に未掲載。確定後に追記）
+  [ ] 2. 代表メッセージは草案です。木村代表ご本人の確認・修正・承認が必要です
+  [ ] 3. 電力の契約仲介について：電気事業法上、小売供給契約の媒介・取次・代理を
+         行う事業者にも説明義務・書面交付義務があります。提携する小売電気事業者名・
+         代理店契約の形態を確認し、必要に応じて表記を追加してください
+  [ ] 4. 電気代の「削減」表現：具体的な削減率・金額を掲載する場合は根拠資料を用意
+         （景品表示法・有利誤認のリスク）。現状は数値を記載していません
+  [ ] 5. カビ処理の「根本から」「防カビ」表現：使用薬剤・工法・効果の持続期間など
+         根拠の確認。効果を断定・保証する表現は避けています
+  [ ] 6. 建築物環境衛生総合管理業等のビル管法に基づく登録の有無（登録がある場合は
+         会社概要に登録番号を記載すると信頼性が高まります）
+  [ ] 7. 施工フロー・エネルギー支援フローの各工程名（現地調査・フォロー等）が
+         実際の業務の流れと一致しているか
+  [ ] 8. 画像はUnsplashのフリー素材（仮）。実際の施工写真への差し替えを推奨
+  [ ] 9. ロゴは仮のワードマーク。正式ロゴがあれば差し替え
+================================================================
+-->
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>株式会社FUTURE PRO｜ビルメンテナンス・エネルギー事業</title>
+<meta name="description" content="株式会社FUTURE PROは、業務用施設のカビ処理・清掃を行うビルメンテナンス事業と、高圧電力の契約仲介・コスト削減コンサルティングを行うエネルギー事業を展開しています。">
+<meta name="theme-color" content="#0a1015">
+<meta property="og:title" content="株式会社FUTURE PRO">
+<meta property="og:description" content="見えないものを、整える。業務用カビ処理・清掃と、高圧電力のコスト削減コンサルティング。">
+<meta property="og:type" content="website">
+<!-- 要確認：公開URL確定後に og:url / og:image を追加 -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a1015'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%237fd9c6' stroke-width='2'/%3E%3Cpath d='M4 16h24' stroke='%23f2b54a' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a1015;
+  --ink-2:#0f1820;
+  --ink-3:#16222c;
+  --line:rgba(214,230,236,.12);
+  --line-2:rgba(214,230,236,.22);
+  --text:#e7eef1;
+  --text-dim:#9fb0b8;
+  --text-faint:#6b7d86;
+  --mint:#7fd9c6;      /* 衛生・空気 */
+  --mint-deep:#3e9c8a;
+  --amber:#f2b54a;     /* 電力・エネルギー */
+  --amber-deep:#b67a1c;
+  --serif:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
+  --sans:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --latin:"Jost","Zen Kaku Gothic New",sans-serif;
+  --gut:clamp(20px,5vw,72px);
+  --max:1240px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ink);color:var(--text);
+  font-family:var(--sans);font-size:16px;line-height:1.95;letter-spacing:.04em;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+p,h1,h2,h3,h4{word-break:auto-phrase;text-wrap:pretty}
+.nw{display:inline-block}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:2px solid var(--mint);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:12px;top:-60px;z-index:200;background:var(--mint);color:var(--ink);padding:10px 16px;font-weight:700;text-decoration:none;border-radius:4px;transition:top .2s}
+.skip:focus{top:12px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+
+/* ---------- 共通見出し ---------- */
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--mint);text-transform:uppercase;display:flex;align-items:center;gap:12px;margin:0 0 22px}
+.eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
+.eyebrow.amber{color:var(--amber)}
+.h2{font-family:var(--serif);font-weight:700;font-size:clamp(28px,4.2vw,48px);line-height:1.45;letter-spacing:.06em;margin:0}
+.lead{color:var(--text-dim);max-width:38em}
+section{position:relative}
+
+/* ---------- ヘッダー ---------- */
+.header{position:fixed;inset:0 0 auto 0;z-index:100;transition:background .4s,border-color .4s,backdrop-filter .4s;border-bottom:1px solid transparent}
+.header.scrolled{background:rgba(10,16,21,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+.header .bar{display:flex;align-items:center;justify-content:space-between;height:76px;max-width:none;padding:0 var(--gut)}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo svg{width:34px;height:34px}
+.logo .wm{font-family:var(--latin);font-weight:500;font-size:19px;letter-spacing:.24em;line-height:1}
+.logo .wm small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.2em;color:var(--text-faint);margin-top:6px}
+.gnav ul{list-style:none;margin:0;padding:0;display:flex;gap:36px}
+.gnav a{text-decoration:none;font-family:var(--latin);font-size:13px;letter-spacing:.2em;color:var(--text-dim);position:relative;padding:6px 0;transition:color .3s}
+.gnav a span{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.14em;color:var(--text-faint);text-align:center}
+.gnav a:hover{color:var(--text)}
+.gnav a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:var(--mint);transform:scaleX(0);transition:transform .4s var(--ease)}
+.gnav a:hover::after{transform:scaleX(1)}
+.menu-btn{display:none;width:48px;height:48px;border:1px solid var(--line-2);background:transparent;border-radius:50%;cursor:pointer;position:relative}
+.menu-btn i{position:absolute;left:14px;right:14px;height:1px;background:var(--text);transition:transform .35s var(--ease),opacity .2s}
+.menu-btn i:nth-child(1){top:19px}.menu-btn i:nth-child(2){top:24px}.menu-btn i:nth-child(3){top:29px}
+.menu-btn[aria-expanded="true"] i:nth-child(1){transform:translateY(5px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] i:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] i:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+
+/* ---------- スクロール計器レール ---------- */
+.rail{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:90;height:56vh;width:44px;display:flex;flex-direction:column;align-items:center;pointer-events:none}
+.rail .lbl{font-family:var(--mono);font-size:9px;letter-spacing:.3em;color:var(--text-faint);writing-mode:vertical-rl;margin-bottom:12px}
+.rail .track{position:relative;flex:1;width:10px;
+  background:repeating-linear-gradient(to bottom,var(--line-2) 0 1px,transparent 1px 10px);}
+.rail .track::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line);transform:translateX(-50%)}
+.rail .fill{position:absolute;left:50%;top:0;width:2px;height:0;transform:translateX(-50%);background:linear-gradient(to bottom,var(--mint),var(--amber));box-shadow:0 0 10px rgba(127,217,198,.6)}
+.rail .needle{position:absolute;left:-8px;width:26px;height:1px;background:var(--text);top:0}
+.rail .needle::after{content:"";position:absolute;right:-5px;top:-3px;width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 10px var(--amber)}
+.rail .val{font-family:var(--mono);font-size:11px;color:var(--text-dim);margin-top:12px;letter-spacing:.06em}
+
+/* ---------- ヒーロー ---------- */
+.hero{min-height:100svh;display:grid;place-items:center;overflow:hidden;isolation:isolate}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 50% 50%,transparent 30%,rgba(10,16,21,.75) 100%),linear-gradient(to bottom,transparent 70%,var(--ink))}
+.hero-in{width:100%;max-width:var(--max);padding:120px var(--gut) 90px;display:grid;grid-template-columns:auto 1fr;gap:clamp(40px,7vw,110px);align-items:center}
+.hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(40px,5.6vw,76px);line-height:1.55;letter-spacing:.14em;margin:0;writing-mode:vertical-rl;height:7.6em;text-shadow:0 0 40px rgba(10,16,21,.8)}
+.hero h1 .em{color:var(--mint)}
+.hero-copy .tag{font-family:var(--latin);font-weight:300;font-size:clamp(34px,5vw,70px);letter-spacing:.12em;line-height:1.1;margin:0 0 30px}
+.hero-copy .tag b{font-weight:500;background:linear-gradient(90deg,var(--mint),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-copy p{color:var(--text-dim);max-width:30em;margin:0 0 40px}
+.hero-domains{display:flex;gap:14px;flex-wrap:wrap}
+.hero-domains a{display:flex;align-items:center;gap:12px;text-decoration:none;border:1px solid var(--line-2);padding:12px 20px 12px 16px;border-radius:999px;font-size:14px;background:rgba(10,16,21,.55);backdrop-filter:blur(6px);transition:border-color .3s,background .3s}
+.hero-domains a:hover{border-color:currentColor}
+.hero-domains .d{width:8px;height:8px;border-radius:50%}
+.hero-domains a.bm{color:var(--mint)}.hero-domains a.bm .d{background:var(--mint);box-shadow:0 0 10px var(--mint)}
+.hero-domains a.en{color:var(--amber)}.hero-domains a.en .d{background:var(--amber);box-shadow:0 0 10px var(--amber)}
+.hero-domains a span{color:var(--text)}
+.scan-hud{position:absolute;left:var(--gut);bottom:32px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--text-faint);display:flex;gap:26px}
+.scan-hud b{color:var(--mint);font-weight:500}
+
+/* ---------- コンセプト ---------- */
+.concept{padding:clamp(110px,14vw,190px) 0}
+.concept-head{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);align-items:end;margin-bottom:clamp(60px,8vw,100px)}
+.lens{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);border:1px solid var(--line)}
+.lens-item{background:var(--ink);padding:clamp(28px,4vw,52px)}
+.lens-item .k{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--text-faint);display:flex;justify-content:space-between;margin-bottom:22px}
+.lens-item svg{width:100%;height:auto;display:block;margin-bottom:28px}
+.lens-item h3{font-family:var(--serif);font-size:clamp(20px,2.2vw,26px);margin:0 0 12px;letter-spacing:.06em;line-height:1.6}
+.lens-item p{color:var(--text-dim);margin:0;font-size:15px}
+.lens-item.bm h3 .c{color:var(--mint)}
+.lens-item.en h3 .c{color:var(--amber)}
+/* SVG アニメーション */
+.spore{transition:opacity 1.2s var(--ease),transform 1.6s var(--ease);transform-box:fill-box;transform-origin:center}
+.lens.in .spore{opacity:0;transform:scale(.2)}
+.draw{stroke-dasharray:var(--len,600);stroke-dashoffset:var(--len,600);transition:stroke-dashoffset 2.2s var(--ease) .6s}
+.lens.in .draw{stroke-dashoffset:0}
+.fadeline{transition:opacity 1.4s var(--ease) .3s}
+.lens.in .fadeline{opacity:.18}
+.shine{opacity:0;transition:opacity 1s var(--ease) 1.6s}
+.lens.in .shine{opacity:1}
+
+/* ---------- 事業 ---------- */
+.business{padding:clamp(60px,8vw,110px) 0 clamp(110px,14vw,180px)}
+.biz-intro{margin-bottom:clamp(60px,8vw,100px)}
+.biz{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(30px,6vw,90px);align-items:center;margin-bottom:clamp(100px,12vw,160px)}
+.biz.rev{grid-template-columns:1fr 1.05fr}
+.biz.rev .biz-visual{order:2}
+.biz-visual{position:relative}
+.ph{position:relative;overflow:hidden;border-radius:2px;background:linear-gradient(135deg,var(--ink-3),var(--ink-2))}
+.ph img{width:100%;height:100%;object-fit:cover;filter:saturate(.8) contrast(1.05)}
+.ph.bm{background:radial-gradient(circle at 30% 30%,rgba(127,217,198,.35),transparent 60%),linear-gradient(135deg,#132a2a,#0c1518)}
+.ph.en{background:radial-gradient(circle at 70% 30%,rgba(242,181,74,.35),transparent 60%),linear-gradient(135deg,#2a2213,#0c1518)}
+.biz-visual .ph{aspect-ratio:4/5}
+.biz-visual .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(10,16,21,.55),transparent 50%)}
+.biz-visual .ph.sm{position:absolute;width:44%;aspect-ratio:1;right:-6%;bottom:-8%;border:6px solid var(--ink);box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.biz.rev .biz-visual .ph.sm{right:auto;left:-6%}
+.biz-visual .scanline{position:absolute;left:0;right:0;height:2px;top:0;z-index:2;pointer-events:none;opacity:0}
+.biz-visual.in .scanline{animation:scanY 3.2s var(--ease) .3s 1 forwards}
+.bm-side .scanline{background:var(--mint);box-shadow:0 0 18px 4px rgba(127,217,198,.55)}
+.en-side .scanline{background:var(--amber);box-shadow:0 0 18px 4px rgba(242,181,74,.55)}
+@keyframes scanY{0%{top:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:100%;opacity:0}}
+.biz-num{font-family:var(--latin);font-weight:300;font-size:13px;letter-spacing:.3em;color:var(--text-faint)}
+.biz h3{font-family:var(--serif);font-weight:700;font-size:clamp(22px,2.8vw,34px);line-height:1.5;letter-spacing:.06em;margin:10px 0 6px}
+.biz .sub{font-family:var(--sans);font-size:15px;letter-spacing:.12em;margin:0 0 28px}
+.bm-side .sub{color:var(--mint)}.en-side .sub{color:var(--amber)}
+.biz-text p{color:var(--text-dim)}
+.targets{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 30px;padding:0;list-style:none}
+.targets li{font-size:13px;border:1px solid var(--line-2);padding:5px 14px;border-radius:999px;color:var(--text)}
+.targets-lbl{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--text-faint);margin-top:28px}
+.services{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.services li{display:grid;grid-template-columns:28px 1fr;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);align-items:start}
+.services svg{width:24px;height:24px;margin-top:3px}
+.services b{display:block;font-weight:700;font-size:16px;letter-spacing:.06em}
+.services span{color:var(--text-dim);font-size:14px;line-height:1.8}
+
+/* フロー */
+.flow{margin-top:56px}
+.flow-lbl{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--text-faint);margin-bottom:18px}
+.flow ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+.flow ol::before{content:"";position:absolute;left:6px;right:6px;top:6px;height:1px;background:var(--line-2)}
+.flow ol::after{content:"";position:absolute;left:6px;top:6px;height:1px;width:calc(100% - 12px);transform:scaleX(0);transform-origin:left;transition:transform 2s var(--ease) .2s}
+.bm-side .flow ol::after{background:var(--mint)}.en-side .flow ol::after{background:var(--amber)}
+.flow.in ol::after{transform:scaleX(1)}
+.flow li{position:relative;padding:28px 10px 0 0;font-size:14px;line-height:1.6}
+.flow li::before{content:"";position:absolute;left:0;top:0;width:13px;height:13px;border-radius:50%;background:var(--ink);border:1px solid var(--line-2);transition:background .4s,border-color .4s}
+.flow.in li::before{border-color:currentColor;background:currentColor}
+.bm-side .flow li{color:var(--mint)}.en-side .flow li{color:var(--amber)}
+.flow.in li:nth-child(1)::before{transition-delay:.2s}.flow.in li:nth-child(2)::before{transition-delay:.8s}
+.flow.in li:nth-child(3)::before{transition-delay:1.4s}.flow.in li:nth-child(4)::before{transition-delay:2s}
+.flow li em{display:block;font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.14em;opacity:.8}
+.flow li strong{display:block;color:var(--text);font-weight:500;margin-top:4px}
+
+/* ---------- 施設マップ ---------- */
+.facility{padding:clamp(110px,14vw,170px) 0;background:linear-gradient(to bottom,var(--ink),var(--ink-2) 20%,var(--ink-2) 80%,var(--ink))}
+.facility-head{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);align-items:end;margin-bottom:56px}
+.fmap{display:grid;grid-template-columns:1.5fr 1fr;gap:clamp(24px,4vw,56px);align-items:stretch}
+.fmap-stage{position:relative;border:1px solid var(--line);background:
+  linear-gradient(var(--line) 1px,transparent 1px) 0 0/40px 40px,
+  linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/40px 40px;background-color:rgba(10,16,21,.6)}
+.fmap-stage svg{display:block;width:100%;height:auto}
+.hot{position:absolute;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;border:0;background:transparent;cursor:pointer;padding:0}
+.hot::before,.hot::after{content:"";position:absolute;inset:12px;border-radius:50%}
+.hot.bm::before{background:var(--mint)}.hot.en::before{background:var(--amber)}
+.hot::after{inset:4px;border:1px solid currentColor;animation:pulse 2.4s ease-out infinite}
+.hot.bm{color:var(--mint)}.hot.en{color:var(--amber)}
+.hot[aria-pressed="true"]::before{inset:9px;box-shadow:0 0 16px currentColor}
+@keyframes pulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.5);opacity:0}}
+.fmap-panel{border:1px solid var(--line);padding:clamp(26px,3vw,40px);display:flex;flex-direction:column;background:var(--ink)}
+.fmap-panel .tagline{font-family:var(--mono);font-size:11px;letter-spacing:.2em;margin-bottom:16px}
+.fmap-panel h3{font-family:var(--serif);font-size:clamp(22px,2.4vw,28px);margin:0 0 16px;line-height:1.5;letter-spacing:.06em}
+.fmap-panel p{color:var(--text-dim);margin:0 0 24px;font-size:15px}
+.fmap-panel .go{margin-top:auto;font-size:14px;text-decoration:none;display:inline-flex;gap:10px;align-items:center;border-bottom:1px solid currentColor;align-self:flex-start;padding-bottom:4px}
+.fmap-list{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.fmap-list button{font:inherit;font-size:12px;color:var(--text-dim);background:transparent;border:1px solid var(--line-2);border-radius:999px;padding:5px 12px;cursor:pointer;transition:color .3s,border-color .3s}
+.fmap-list button[aria-pressed="true"]{color:var(--text);border-color:var(--text)}
+.fade-swap{animation:swap .5s var(--ease)}
+@keyframes swap{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- フォトバンド ---------- */
+.band{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2px;height:clamp(240px,34vw,460px)}
+.band .ph{height:100%}
+.band figure{margin:0;position:relative;min-height:0;overflow:hidden}
+.band figcaption{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--text);z-index:2;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+
+/* ---------- メッセージ ---------- */
+.message{padding:clamp(120px,15vw,200px) 0}
+.msg{display:grid;grid-template-columns:auto 1fr;gap:clamp(40px,8vw,120px);align-items:start}
+.msg-title{writing-mode:vertical-rl;font-family:var(--serif);font-weight:700;font-size:clamp(28px,3.4vw,42px);line-height:1.7;letter-spacing:.16em;margin:0;height:9.6em}
+.msg-title .em{color:var(--amber)}
+.msg-body p{color:var(--text-dim);margin:0 0 1.6em;max-width:34em}
+.sign{margin-top:48px;display:flex;align-items:baseline;gap:20px;flex-wrap:wrap}
+.sign .role{font-size:13px;color:var(--text-faint);letter-spacing:.14em}
+.sign .name{font-family:var(--serif);font-size:28px;letter-spacing:.3em}
+
+/* ---------- 会社概要 ---------- */
+.company{padding:0 0 clamp(120px,14vw,180px)}
+.company-grid{display:grid;grid-template-columns:1fr 2fr;gap:clamp(30px,6vw,90px)}
+.ctable{width:100%;border-collapse:collapse}
+.ctable th,.ctable td{text-align:left;vertical-align:top;padding:24px 0;border-bottom:1px solid var(--line);font-weight:400}
+.ctable tr:first-child th,.ctable tr:first-child td{border-top:1px solid var(--line)}
+.ctable th{width:9em;color:var(--text-faint);font-size:14px;letter-spacing:.14em}
+.ctable td ul{margin:0;padding:0;list-style:none}
+.ctable td li+li{margin-top:12px}
+.ctable td small{display:block;color:var(--text-dim);font-size:13px}
+.ctable .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:10px;vertical-align:middle}
+
+/* ---------- フッター ---------- */
+.footer{border-top:1px solid var(--line);padding:56px 0 40px}
+.footer .wrap{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.footer .big{font-family:var(--latin);font-weight:300;font-size:clamp(36px,7vw,96px);letter-spacing:.12em;line-height:1;margin:0;color:transparent;-webkit-text-stroke:1px var(--line-2)}
+.footer small{font-family:var(--mono);font-size:11px;color:var(--text-faint);letter-spacing:.1em}
+.to-top{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--text-dim);text-decoration:none;border:1px solid var(--line-2);padding:10px 16px;border-radius:999px}
+
+/* ---------- リビール ---------- */
+.rv{opacity:0;transform:translateY(28px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.12s}.rv.d2{transition-delay:.24s}.rv.d3{transition-delay:.36s}
+
+/* ---------- レスポンシブ ---------- */
+@media (max-width:1024px){
+  .gnav{position:fixed;inset:0;background:rgba(10,16,21,.97);display:grid;place-items:center;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+  .gnav.open{opacity:1;visibility:visible}
+  .gnav ul{flex-direction:column;gap:28px;text-align:center}
+  .gnav a{font-size:20px}
+  .gnav a span{font-size:12px;margin-top:4px}
+  .menu-btn{display:block;z-index:120}
+  .fmap{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .rail{right:8px;width:24px;height:44vh}
+  .rail .lbl{display:none}
+  .hero-in{grid-template-columns:1fr;gap:36px;padding-top:130px}
+  .hero h1{writing-mode:horizontal-tb;height:auto;font-size:clamp(36px,10vw,52px);letter-spacing:.08em}
+  .scan-hud{display:none}
+  .concept-head,.facility-head,.company-grid{grid-template-columns:1fr}
+  .lens{grid-template-columns:1fr}
+  .biz,.biz.rev{grid-template-columns:1fr}
+  .biz.rev .biz-visual{order:0}
+  .biz-visual .ph.sm{width:40%;right:-2%}
+  .biz.rev .biz-visual .ph.sm{left:auto;right:-2%}
+  .biz-text{margin-top:30px}
+  .flow ol{grid-template-columns:1fr 1fr;row-gap:24px}
+  .flow ol::before,.flow ol::after{display:none}
+  .band{grid-template-columns:1fr 1fr;height:auto}
+  .band figure:first-child{grid-column:1/-1}
+  .band .ph{aspect-ratio:4/3;height:auto}
+  .msg{grid-template-columns:1fr}
+  .msg-title{writing-mode:horizontal-tb;height:auto;letter-spacing:.08em}
+  .ctable th{width:6.5em}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+  .draw{stroke-dashoffset:0}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+  <div class="bar">
+    <a class="logo" href="#top" aria-label="株式会社FUTURE PRO トップへ">
+      <!-- 要確認：正式ロゴがあれば差し替え -->
+      <svg viewBox="0 0 34 34" aria-hidden="true">
+        <circle cx="17" cy="17" r="12" fill="none" stroke="#7fd9c6" stroke-width="1.4"/>
+        <circle cx="17" cy="17" r="5" fill="none" stroke="#e7eef1" stroke-width="1" opacity=".5"/>
+        <path d="M2 17h30" stroke="#f2b54a" stroke-width="1.6"/>
+      </svg>
+      <span class="wm">FUTURE PRO<small>株式会社FUTURE PRO</small></span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="メニューを開く" aria-expanded="false" aria-controls="gnav"><i></i><i></i><i></i></button>
+    <nav class="gnav" id="gnav" aria-label="グローバルナビゲーション">
+      <ul>
+        <li><a href="#concept">CONCEPT<span>コンセプト</span></a></li>
+        <li><a href="#business">BUSINESS<span>事業内容</span></a></li>
+        <li><a href="#facility">FACILITY<span>施設の中で</span></a></li>
+        <li><a href="#message">MESSAGE<span>代表挨拶</span></a></li>
+        <li><a href="#company">COMPANY<span>会社概要</span></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- スクロール進捗：点検メーター -->
+<div class="rail" aria-hidden="true">
+  <div class="lbl">INSPECTION</div>
+  <div class="track"><div class="fill" id="railFill"></div><div class="needle" id="railNeedle"></div></div>
+  <div class="val" id="railVal">000</div>
+</div>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top" aria-label="メインビジュアル">
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="hero-in">
+    <h1 class="rv">見えないものを<span class="em">整える</span></h1>
+    <div class="hero-copy">
+      <p class="tag rv d1">SEE THE<br><b>UNSEEN.</b></p>
+      <p class="rv d2">壁の裏やダクトの奥に潜むカビ。<br>電気料金の明細の奥に潜むムダ。<br>施設の“見えない部分”にプロの目で向き合い、<span class="nw">事業の未来を支えます。</span></p>
+      <div class="hero-domains rv d3">
+        <a href="#biz-bm" class="bm"><i class="d"></i><span>業務用カビ処理・清掃</span></a>
+        <a href="#biz-en" class="en"><i class="d"></i><span>高圧電力のコスト削減</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="scan-hud" aria-hidden="true"><span>MODE <b>SCAN</b></span><span>HYGIENE / ENERGY</span><span id="hudCount">DETECTED 000</span></div>
+</section>
+
+<!-- ============ CONCEPT ============ -->
+<section class="concept" id="concept" aria-labelledby="concept-h">
+  <div class="wrap">
+    <div class="concept-head">
+      <div>
+        <p class="eyebrow rv">Concept</p>
+        <h2 class="h2 rv d1" id="concept-h">差が出るのは、<br><span class="nw">いつも見えない場所</span></h2>
+      </div>
+      <p class="lead rv d2">衛生も、コストも。施設の質を左右するものほど、ふだんは目に入りません。FUTURE PROは「空気」と「電気」という、建物を支える2つの見えない領域を専門に、原因を見つけ、根本から整えることを仕事にしています。</p>
+    </div>
+
+    <div class="lens" id="lens">
+      <article class="lens-item bm rv">
+        <div class="k"><span>HYGIENE</span><span>空気・衛生</span></div>
+        <svg viewBox="0 0 400 220" aria-hidden="true">
+          <!-- 壁断面 -->
+          <rect x="20" y="20" width="360" height="180" fill="none" stroke="rgba(214,230,236,.18)"/>
+          <path d="M20 160h360" stroke="rgba(214,230,236,.18)" stroke-dasharray="4 6"/>
+          <rect x="250" y="40" width="110" height="34" fill="none" stroke="rgba(214,230,236,.25)"/>
+          <text x="256" y="92" fill="#6b7d86" font-family="IBM Plex Mono" font-size="10" letter-spacing="2">DUCT</text>
+          <g id="spores" fill="#7c8c6e"></g>
+          <path class="draw" style="--len:740" d="M30 150 C 110 150, 120 60, 200 60 S 300 140, 370 140" fill="none" stroke="#7fd9c6" stroke-width="1.5"/>
+          <g class="shine"><circle cx="200" cy="60" r="5" fill="#7fd9c6"/><text x="212" y="52" fill="#7fd9c6" font-family="IBM Plex Mono" font-size="11" letter-spacing="2">CLEAN</text></g>
+        </svg>
+        <h3><span class="c">カビ</span>は、見える前から<br class="pc">広がっている。</h3>
+        <p>表面を拭くだけでは、奥に残った原因からまた発生します。見えにくい場所まで確かめ、除去・防カビ・清掃までを一貫して行います。</p>
+      </article>
+      <article class="lens-item en rv d1">
+        <div class="k"><span>ENERGY</span><span>電気・コスト</span></div>
+        <svg viewBox="0 0 400 220" aria-hidden="true">
+          <path d="M30 30v170h350" fill="none" stroke="rgba(214,230,236,.25)"/>
+          <g stroke="rgba(214,230,236,.1)"><path d="M30 70h350M30 110h350M30 150h350"/></g>
+          <path class="fadeline" d="M30 150 L60 120 L85 140 L110 60 L135 110 L160 70 L185 130 L210 50 L235 120 L260 80 L285 140 L310 65 L335 115 L360 90 L380 120" fill="none" stroke="#a46f2b" stroke-width="1.5" stroke-dasharray="3 4"/>
+          <path class="draw" style="--len:400" d="M30 150 C 120 130, 200 112, 380 108" fill="none" stroke="#f2b54a" stroke-width="2"/>
+          <g class="shine"><circle cx="380" cy="108" r="5" fill="#f2b54a"/><text x="292" y="98" fill="#f2b54a" font-family="IBM Plex Mono" font-size="11" letter-spacing="2">OPTIMIZED</text></g>
+          <text x="36" y="24" fill="#6b7d86" font-family="IBM Plex Mono" font-size="10" letter-spacing="2">kW / COST</text>
+        </svg>
+        <h3><span class="c">電気代</span>は、契約の中に<br class="pc">見直す余地がある。</h3>
+        <p>同じ電気を使っていても、プランや契約先によって支払いは変わります。使用状況を読み解き、自社に合った最適な契約へと整えます。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BUSINESS ============ -->
+<section class="business" id="business" aria-labelledby="business-h">
+  <div class="wrap">
+    <div class="biz-intro">
+      <p class="eyebrow rv">Business</p>
+      <h2 class="h2 rv d1" id="business-h">2つの専門で、<span class="nw">施設と経営を支える</span></h2>
+    </div>
+
+    <!-- ビルメンテナンス事業 -->
+    <article class="biz bm-side" id="biz-bm">
+      <div class="biz-visual rv">
+        <div class="scanline"></div>
+        <div class="ph bm">
+          <!-- 要確認：フリー素材（仮）。実際の施工写真への差し替え推奨 -->
+          <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1100&q=75" alt="業務用施設の清掃作業のイメージ" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="ph bm sm">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=700&q=75" alt="清潔に保たれたオフィス空間のイメージ" loading="lazy" onerror="this.remove()">
+        </div>
+      </div>
+      <div class="biz-text">
+        <p class="biz-num rv">BUILDING MAINTENANCE</p>
+        <h3 class="rv d1">業務用カビ処理・清掃</h3>
+        <p class="sub rv d1">ビルメンテナンス事業</p>
+        <p class="rv d2">飲食店・商業施設・オフィスなどの業務用施設を対象に、カビの除去・防カビ処理・清掃を行います。見えにくい場所のカビまで根本から対処し、衛生的で安心な空間づくりをサポートします。</p>
+        <!-- 要確認：「根本から」の根拠（工法・薬剤）。効果の断定・保証表現は避けています -->
+        <p class="targets-lbl rv">FOR</p>
+        <ul class="targets rv"><li>飲食店</li><li>商業施設</li><li>オフィス</li></ul>
+        <ul class="services rv">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#7fd9c6" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="9" cy="10" r="1.2" fill="#7fd9c6"/><circle cx="14" cy="14" r="1.2" fill="#7fd9c6"/><path d="M4 20 20 4"/></svg><div><b>カビの除去</b><span>目に見える黒ずみだけでなく、見えにくい場所に潜むカビまで対処します。</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#7fd9c6" stroke-width="1.4" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><div><b>防カビ処理</b><span>除去後の再発を抑えるための処理を施し、きれいな状態を保ちやすくします。</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#7fd9c6" stroke-width="1.4" aria-hidden="true"><path d="M5 21h14M8 21V11h8v10M12 11V3"/><path d="M4 7l3 1M20 7l-3 1M12 3l0 0"/></svg><div><b>清掃</b><span>業務用施設ならではの汚れにも対応し、衛生的で安心な空間に仕上げます。</span></div></li>
+        </ul>
+        <div class="flow rv" data-flow>
+          <p class="flow-lbl">PROCESS</p>
+          <!-- 要確認：工程名が実際の業務フローと一致しているか -->
+          <ol>
+            <li><em>01</em><strong>現地調査</strong></li>
+            <li><em>02</em><strong>カビの除去</strong></li>
+            <li><em>03</em><strong>防カビ処理</strong></li>
+            <li><em>04</em><strong>清掃・仕上げ</strong></li>
+          </ol>
+        </div>
+      </div>
+    </article>
+
+    <!-- エネルギー事業 -->
+    <article class="biz rev en-side" id="biz-en">
+      <div class="biz-visual rv">
+        <div class="scanline"></div>
+        <div class="ph en">
+          <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1100&q=75" alt="送電鉄塔と電線のイメージ" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="ph en sm">
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=700&q=75" alt="高圧電力を利用するビルのイメージ" loading="lazy" onerror="this.remove()">
+        </div>
+      </div>
+      <div class="biz-text">
+        <p class="biz-num rv">ENERGY SOLUTIONS</p>
+        <h3 class="rv d1">高圧電力の契約仲介・<br><span class="nw">コスト削減コンサルティング</span></h3>
+        <p class="sub rv d1">エネルギー事業</p>
+        <p class="rv d2">工場・ビル・店舗など高圧電力をご利用の法人を対象に、電気の使用状況を分析して最適な料金プランを設計します。電力会社の切り替え手続きまでサポートし、電気代の削減と経営の安定につなげます。</p>
+        <!-- 要確認：電気事業法に基づく媒介・取次業者の説明義務／提携小売電気事業者名の表記 -->
+        <!-- 要確認：削減率・削減額を掲載する場合は根拠資料（景品表示法） -->
+        <p class="targets-lbl rv">FOR</p>
+        <ul class="targets rv"><li>工場</li><li>ビル</li><li>店舗</li><li>高圧電力をご利用の法人</li></ul>
+        <ul class="services rv">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#f2b54a" stroke-width="1.4" aria-hidden="true"><path d="M4 20V4M4 20h16"/><path d="M7 15l4-5 3 3 5-7"/></svg><div><b>電気の使用状況の分析</b><span>使い方の傾向を読み解き、契約を見直すための土台をつくります。</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#f2b54a" stroke-width="1.4" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M8 9h8M8 13h5M8 17h3"/><circle cx="17" cy="16" r="2.4"/></svg><div><b>最適な料金プランの設計</b><span>分析結果をもとに、事業の実態に合った料金プランを設計します。</span></div></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#f2b54a" stroke-width="1.4" aria-hidden="true"><path d="M13 3 6 13h5l-1 8 7-10h-5z"/></svg><div><b>電力会社の切り替えサポート</b><span>煩雑になりがちな切り替え手続きまで、責任をもってサポートします。</span></div></li>
+        </ul>
+        <div class="flow rv" data-flow>
+          <p class="flow-lbl">PROCESS</p>
+          <ol>
+            <li><em>01</em><strong>使用状況の分析</strong></li>
+            <li><em>02</em><strong>料金プランの設計</strong></li>
+            <li><em>03</em><strong>切り替え手続き</strong></li>
+            <li><em>04</em><strong>削減と経営の安定へ</strong></li>
+          </ol>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ FACILITY MAP ============ -->
+<section class="facility" id="facility" aria-labelledby="facility-h">
+  <div class="wrap">
+    <div class="facility-head">
+      <div>
+        <p class="eyebrow rv">Inside your facility</p>
+        <h2 class="h2 rv d1" id="facility-h">建物のどこで、<br><span class="nw">私たちが働くのか</span></h2>
+      </div>
+      <p class="lead rv d2">ひとつの建物の中に、衛生とエネルギー、両方の“見えない課題”があります。ポイントを選ぶと、FUTURE PROがどこに、どのように関わるかをご覧いただけます。</p>
+    </div>
+
+    <div class="fmap rv">
+      <div class="fmap-stage" id="fmapStage">
+        <svg viewBox="0 0 800 520" aria-hidden="true">
+          <g fill="none" stroke="rgba(214,230,236,.35)" stroke-width="1.2">
+            <!-- 建物外形 -->
+            <path d="M140 470V120h420v350"/>
+            <path d="M100 470h600"/>
+            <!-- 各階 -->
+            <path d="M140 230h420M140 350h420"/>
+            <!-- 屋上設備 -->
+            <rect x="400" y="86" width="110" height="34"/>
+            <path d="M420 86v34M440 86v34M460 86v34M480 86v34"/>
+            <!-- 窓 -->
+            <g stroke="rgba(214,230,236,.18)">
+              <rect x="170" y="150" width="70" height="50"/><rect x="260" y="150" width="70" height="50"/><rect x="350" y="150" width="70" height="50"/>
+              <rect x="450" y="390" width="80" height="80"/>
+            </g>
+            <!-- 天井ダクト（3F） -->
+            <path d="M160 245h380" stroke="rgba(127,217,198,.45)" stroke-dasharray="6 5"/>
+            <!-- 厨房フード（2F） -->
+            <path d="M200 262h110l-15 30h-80z" stroke="rgba(127,217,198,.6)"/>
+            <path d="M255 262V230" stroke="rgba(127,217,198,.6)"/>
+            <rect x="200" y="310" width="120" height="40" stroke="rgba(214,230,236,.25)"/>
+            <!-- 店舗（1F） -->
+            <rect x="170" y="400" width="200" height="70" stroke="rgba(214,230,236,.18)"/>
+            <!-- キュービクル -->
+            <rect x="600" y="390" width="70" height="80" stroke="rgba(242,181,74,.7)"/>
+            <path d="M610 405h50M610 420h50M610 435h50" stroke="rgba(242,181,74,.45)"/>
+            <!-- 引込線 -->
+            <path d="M760 300L700 300 700 390 670 390" stroke="rgba(242,181,74,.6)" stroke-dasharray="4 4"/>
+            <path d="M670 450h-110" stroke="rgba(242,181,74,.6)" stroke-dasharray="4 4"/>
+            <!-- 水まわり -->
+            <path d="M440 300h90v50h-90z" stroke="rgba(214,230,236,.25)"/>
+            <circle cx="485" cy="325" r="10" stroke="rgba(127,217,198,.5)"/>
+          </g>
+          <g font-family="IBM Plex Mono" font-size="11" fill="#6b7d86" letter-spacing="2">
+            <text x="572" y="180">3F OFFICE</text>
+            <text x="572" y="296">2F RESTAURANT</text>
+            <text x="200" y="392">1F SHOP</text>
+            <text x="594" y="490">CUBICLE</text>
+          </g>
+        </svg>
+        <!-- 位置は viewBox 800x520 基準の％ -->
+        <button class="hot bm" style="left:31.9%;top:51.5%" data-spot="0" aria-pressed="true" aria-label="厨房・排気ダクトまわり"></button>
+        <button class="hot bm" style="left:56%;top:47.1%" data-spot="1" aria-label="空調吹出口・天井まわり"></button>
+        <button class="hot bm" style="left:60.6%;top:62.5%" data-spot="2" aria-label="水まわり・バックヤード"></button>
+        <button class="hot en" style="left:79.4%;top:82%" data-spot="3" aria-label="受変電設備（キュービクル）"></button>
+        <button class="hot en" style="left:40%;top:30%" data-spot="4" aria-label="空調・照明・設備の電力使用"></button>
+      </div>
+      <div class="fmap-panel" aria-live="polite">
+        <div id="fmapContent"></div>
+        <ul class="fmap-list" id="fmapList"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PHOTO BAND ============ -->
+<div class="band" aria-label="事業イメージ写真">
+  <figure class="rv">
+    <div class="ph en"><img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1400&q=75" alt="夜の都市と建物の灯りのイメージ" loading="lazy" onerror="this.remove()"></div>
+    <figcaption>BUILDINGS RUN ON THE UNSEEN</figcaption>
+  </figure>
+  <figure class="rv d1">
+    <div class="ph bm"><img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=900&q=75" alt="清潔な業務用キッチンのイメージ" loading="lazy" onerror="this.remove()"></div>
+    <figcaption>HYGIENE</figcaption>
+  </figure>
+  <figure class="rv d2">
+    <div class="ph en"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=900&q=75" alt="設備を確認する技術者のイメージ" loading="lazy" onerror="this.remove()"></div>
+    <figcaption>ENERGY</figcaption>
+  </figure>
+</div>
+
+<!-- ============ MESSAGE ============ -->
+<!-- 要確認：以下の代表メッセージは草案です。木村代表ご本人の確認・修正・承認後に公開してください -->
+<section class="message" id="message" aria-labelledby="message-h">
+  <div class="wrap msg">
+    <h2 class="msg-title rv" id="message-h">見えない部分に、<br><span class="em">誠実でありたい</span></h2>
+    <div class="msg-body">
+      <p class="eyebrow amber rv">Message</p>
+      <p class="rv">お店の厨房、オフィスの天井、工場の受変電設備。建物の中には、ふだん誰の目にも触れない場所がたくさんあります。そして施設の衛生や経営のコストは、そうした見えない場所で静かに差がついていきます。</p>
+      <p class="rv">私たちFUTURE PROは、カビ処理・清掃によって衛生的で安心な空間を、高圧電力のコンサルティングによって無理のないコストの仕組みを届けています。分野は違っても、根本にあるのは同じ姿勢です。見えにくいところから目をそらさず、原因を確かめ、きちんと整えること。</p>
+      <p class="rv">お客様が本業に集中し、その先の未来を描けるように。社名に込めた「未来のプロフェッショナル」として、ひとつひとつの現場に誠実に向き合ってまいります。</p>
+      <div class="sign rv">
+        <span class="role">株式会社FUTURE PRO</span>
+        <span class="name">木村 健太郎</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPANY ============ -->
+<section class="company" id="company" aria-labelledby="company-h">
+  <div class="wrap company-grid">
+    <div>
+      <p class="eyebrow rv">Company</p>
+      <h2 class="h2 rv d1" id="company-h">会社概要</h2>
+    </div>
+    <table class="ctable rv d1">
+      <tbody>
+        <tr><th scope="row">会社名</th><td>株式会社FUTURE PRO</td></tr>
+        <tr><th scope="row">代表者</th><td>木村 健太郎</td></tr>
+        <!-- 要確認：代表者の役職名（代表取締役など） -->
+        <tr><th scope="row">所在地</th><td>東京都江東区新砂3丁目4番43</td></tr>
+        <!-- 要確認：郵便番号・建物名・部屋番号の有無 -->
+        <!-- 要確認：設立 <tr><th scope="row">設立</th><td></td></tr> -->
+        <!-- 要確認：資本金 <tr><th scope="row">資本金</th><td></td></tr> -->
+        <!-- 要確認：従業員数 <tr><th scope="row">従業員数</th><td></td></tr> -->
+        <tr><th scope="row">事業内容</th><td>
+          <ul>
+            <li><span class="dot" style="background:var(--mint)"></span>ビルメンテナンス事業<small>業務用カビ処理・清掃（飲食店・商業施設・オフィス）</small></li>
+            <li><span class="dot" style="background:var(--amber)"></span>エネルギー事業<small>高圧電力の契約仲介・コスト削減コンサルティング</small></li>
+          </ul>
+        </td></tr>
+        <!-- 要確認：ビル管法に基づく登録、提携小売電気事業者など、掲載すべき登録・許認可の有無 -->
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <p class="big" aria-hidden="true">FUTURE PRO</p>
+      <small>&copy; <span id="yr">2026</span> FUTURE PRO Co., Ltd.</small>
+    </div>
+    <a class="to-top" href="#top">BACK TO TOP ↑</a>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* ---------- ヘッダー状態 & 計器レール ---------- */
+  const header = document.getElementById('header');
+  const fill = document.getElementById('railFill');
+  const needle = document.getElementById('railNeedle');
+  const val = document.getElementById('railVal');
+  let ticking = false;
+  const onScroll = () => {
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 40);
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, y / max)) : 0;
+    fill.style.height = (p * 100) + '%';
+    needle.style.top = (p * 100) + '%';
+    val.textContent = String(Math.round(p * 100)).padStart(3, '0');
+    ticking = false;
+  };
+  addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(onScroll); ticking = true; } }, { passive: true });
+  onScroll();
+
+  /* ---------- モバイルメニュー ---------- */
+  const btn = document.getElementById('menuBtn');
+  const nav = document.getElementById('gnav');
+  const setMenu = (open) => {
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+    nav.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  btn.addEventListener('click', () => setMenu(btn.getAttribute('aria-expanded') !== 'true'));
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); btn.focus(); } });
+
+  /* ---------- コンセプトSVG：胞子の生成 ---------- */
+  const spores = document.getElementById('spores');
+  const ns = 'http://www.w3.org/2000/svg';
+  let seed = 7;
+  const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  for (let i = 0; i < 46; i++) {
+    const c = document.createElementNS(ns, 'circle');
+    c.setAttribute('cx', (30 + rnd() * 340).toFixed(1));
+    c.setAttribute('cy', (30 + rnd() * 160).toFixed(1));
+    c.setAttribute('r', (1.2 + rnd() * 2.6).toFixed(1));
+    c.setAttribute('opacity', (0.35 + rnd() * 0.5).toFixed(2));
+    c.setAttribute('class', 'spore');
+    c.style.transitionDelay = (rnd() * 1.2).toFixed(2) + 's';
+    spores.appendChild(c);
+  }
+
+  /* ---------- リビール ---------- */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { threshold: 0.18, rootMargin: '0px 0px -6% 0px' });
+  document.querySelectorAll('.rv, #lens, [data-flow], .biz-visual').forEach(el => io.observe(el));
+
+  /* ---------- 施設マップ ---------- */
+  const spots = [
+    { t:'bm', tag:'BUILDING MAINTENANCE', title:'厨房・排気ダクトまわり', body:'湿気と油汚れが重なりやすく、カビが発生しやすい場所です。飲食店の衛生を守るために、見えにくい奥まで確認し、除去・防カビ・清掃を行います。', link:'#biz-bm', linkTxt:'カビ処理・清掃について' },
+    { t:'bm', tag:'BUILDING MAINTENANCE', title:'空調吹出口・天井まわり', body:'結露しやすく、気づかないうちに黒ずみが広がることがある場所です。オフィスや商業施設の快適な空気環境づくりをサポートします。', link:'#biz-bm', linkTxt:'カビ処理・清掃について' },
+    { t:'bm', tag:'BUILDING MAINTENANCE', title:'水まわり・バックヤード', body:'お客様の目に触れにくい場所ほど、清掃が後回しになりがちです。施設全体の衛生を底上げし、安心して使える空間を保ちます。', link:'#biz-bm', linkTxt:'カビ処理・清掃について' },
+    { t:'en', tag:'ENERGY SOLUTIONS', title:'受変電設備（キュービクル）', body:'高圧電力を受け入れる設備がある施設が、エネルギー事業の対象です。電力会社や料金プランの見直しで、電気代の削減につなげます。', link:'#biz-en', linkTxt:'高圧電力のコスト削減について' },
+    { t:'en', tag:'ENERGY SOLUTIONS', title:'空調・照明・設備の電力使用', body:'どの時間帯に、どれだけ電気を使っているか。使用状況を分析することで、施設に合った最適な料金プランが見えてきます。', link:'#biz-en', linkTxt:'高圧電力のコスト削減について' }
+  ];
+  const hots = [...document.querySelectorAll('.hot')];
+  const content = document.getElementById('fmapContent');
+  const list = document.getElementById('fmapList');
+  spots.forEach((s, i) => {
+    const li = document.createElement('li');
+    const b = document.createElement('button');
+    b.type = 'button'; b.textContent = s.title; b.dataset.spot = i;
+    b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+    li.appendChild(b); list.appendChild(li);
+  });
+  const chips = [...list.querySelectorAll('button')];
+  const show = (i) => {
+    const s = spots[i];
+    const col = s.t === 'bm' ? 'var(--mint)' : 'var(--amber)';
+    content.innerHTML = '<p class="tagline" style="color:' + col + '">' + s.tag + '</p><h3>' + s.title + '</h3><p>' + s.body + '</p><a class="go" style="color:' + col + '" href="' + s.link + '">' + s.linkTxt + ' →</a>';
+    content.classList.remove('fade-swap'); void content.offsetWidth; content.classList.add('fade-swap');
+    hots.forEach(h => h.setAttribute('aria-pressed', String(+h.dataset.spot === i)));
+    chips.forEach(c => c.setAttribute('aria-pressed', String(+c.dataset.spot === i)));
+  };
+  [...hots, ...chips].forEach(el => el.addEventListener('click', () => show(+el.dataset.spot)));
+  show(0);
+
+  /* ---------- ヒーローCanvas：走査線が胞子を光の格子へ ---------- */
+  const cv = document.getElementById('heroCanvas');
+  const ctx = cv.getContext('2d');
+  const hud = document.getElementById('hudCount');
+  let W, H, DPR, parts = [], grid = 64, beam = -0.1, phase = 'scan', hold = 0, raf;
+  const MINT = [127,217,198], AMB = [242,181,74];
+
+  const build = () => {
+    DPR = Math.min(2, window.devicePixelRatio || 1);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W * DPR; cv.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    grid = W < 700 ? 48 : 64;
+    const n = W < 700 ? 70 : 150;
+    const cols = Math.floor(W / grid), rows = Math.floor(H / grid);
+    const nodes = [];
+    for (let c = 1; c < cols; c++) for (let r = 1; r < rows; r++) nodes.push([c * grid + (W - cols * grid) / 2, r * grid + (H - rows * grid) / 2]);
+    for (let i = nodes.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [nodes[i], nodes[j]] = [nodes[j], nodes[i]]; }
+    parts = [];
+    for (let i = 0; i < Math.min(n, nodes.length); i++) {
+      parts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
+        r: 1 + Math.random() * 2.2, s: 0, k: 0, tx: nodes[i][0], ty: nodes[i][1], col: nodes[i][0] < W * (0.35 + Math.random() * .3) ? MINT : AMB });
+    }
+  };
+
+  const draw = () => {
+    ctx.clearRect(0, 0, W, H);
+    const bx = beam * W;
+    // 線
+    for (let i = 0; i < parts.length; i++) {
+      const a = parts[i]; if (a.k < .6) continue;
+      for (let j = i + 1; j < parts.length; j++) {
+        const b = parts[j]; if (b.k < .6) continue;
+        const dx = a.tx - b.tx, dy = a.ty - b.ty;
+        if (dx * dx + dy * dy <= grid * grid * 1.05) {
+          const al = Math.min(a.k, b.k) * .35;
+          ctx.strokeStyle = 'rgba(' + a.col.join(',') + ',' + al + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+    }
+    // 粒子
+    let count = 0;
+    for (const p of parts) {
+      if (p.s) count++;
+      if (p.k < .99) {
+        ctx.fillStyle = 'rgba(124,140,110,' + (0.42 * (1 - p.k)) + ')';
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 2.2, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = 'rgba(150,165,135,' + (0.6 * (1 - p.k)) + ')';
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      }
+      if (p.k > 0) {
+        ctx.fillStyle = 'rgba(' + p.col.join(',') + ',' + p.k + ')';
+        ctx.shadowColor = 'rgba(' + p.col.join(',') + ',.9)'; ctx.shadowBlur = 10 * p.k;
+        ctx.beginPath(); ctx.arc(p.x, p.y, 1.8, 0, Math.PI * 2); ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+    }
+    // 走査線
+    if (phase === 'scan' && bx > -40 && bx < W + 40) {
+      const g = ctx.createLinearGradient(bx - 120, 0, bx + 4, 0);
+      g.addColorStop(0, 'rgba(127,217,198,0)'); g.addColorStop(1, 'rgba(127,217,198,.12)');
+      ctx.fillStyle = g; ctx.fillRect(bx - 120, 0, 124, H);
+      ctx.fillStyle = 'rgba(127,217,198,.85)'; ctx.fillRect(bx, 0, 1.5, H);
+    }
+    hud.textContent = 'DETECTED ' + String(count).padStart(3, '0');
+  };
+
+  const step = () => {
+    if (phase === 'scan') {
+      beam += 0.0028;
+      if (beam > 1.08) { phase = 'hold'; hold = 0; }
+    } else if (phase === 'hold') {
+      if (++hold > 200) { phase = 'release'; hold = 0; parts.forEach(p => { p.s = 0; p.vx = (Math.random() - .5) * .6; p.vy = (Math.random() - .5) * .6; }); }
+    } else if (phase === 'release') {
+      if (++hold > 160) { phase = 'scan'; beam = -0.1; }
+    }
+    const bx = beam * W;
+    for (const p of parts) {
+      if (phase === 'scan' && !p.s && p.x < bx) p.s = 1;
+      if (p.s) {
+        p.k += (1 - p.k) * .05;
+        p.x += (p.tx - p.x) * .045; p.y += (p.ty - p.y) * .045;
+      } else {
+        p.k += (0 - p.k) * .04;
+        p.vx += (Math.random() - .5) * .04; p.vy += (Math.random() - .5) * .04;
+        p.vx *= .98; p.vy *= .98;
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < -10) p.x = W + 10; if (p.x > W + 10) p.x = -10;
+        if (p.y < -10) p.y = H + 10; if (p.y > H + 10) p.y = -10;
+      }
+    }
+    draw();
+    raf = requestAnimationFrame(step);
+  };
+
+  build();
+  if (reduce) {
+    parts.forEach(p => { p.s = 1; p.k = 1; p.x = p.tx; p.y = p.ty; });
+    phase = 'hold'; draw();
+  } else {
+    // 画面外では停止
+    const vis = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { if (!raf) raf = requestAnimationFrame(step); }
+      else { cancelAnimationFrame(raf); raf = null; }
+    });
+    vis.observe(cv);
+  }
+  let rt;
+  addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => { build(); if (reduce) { parts.forEach(p => { p.s = 1; p.k = 1; p.x = p.tx; p.y = p.ty; }); draw(); } }, 200);
+  });
+})();
+</script>
+</body>
+</html>
